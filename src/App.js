@@ -1,48 +1,21 @@
-import React, { useState, useEffect, createContext } from "react";
-import DeveloperInfo from "./components/Developer";
-import MoodBtns from "./components/MoodBtns";
-import Nav from "./components/Nav";
-import * as API from "./utils/API";
-// import DeveloperContext from "./utils/DeveloperContext";
-import "./App.css";
+import React from 'react';
+import './App.css';
+import Header from './components/Header';
+// import EmployeeTable from './components/Table';
+import EmployeeTable from './components/EmployeeTable';
+
+// material imports
+import Container from '@material-ui/core/Container';
 
 function App() {
-  const [developerState, setDeveloperState] = useState({
-    name: "",
-    mood: "",
-    lifeLongLearner: true,
-    excitementLevel: 0
-  });
-
-  function changeMood(mood) {
-    if(mood === "determined") {
-      developerState.excitementLevel += 10000;
-    }
-    else {
-      developerState.excitementLevel -= 10000;
-    }
-    setDeveloperState({
-      ...developerState,
-      mood
-    });
-  }
-
-  useEffect(() => {
-    // For demonstration purposes, we mock an API call.
-    API.getDeveloper.then((res) => {
-      setDeveloperState(res);
-    });
-  }, []);
-
-  return (
-    <div className="container">
-      {/* <DeveloperContext.Provider value={developerState}> */}
-        <Nav developerState={developerState} />
-        <DeveloperInfo developerState={developerState} />
-        <MoodBtns developerState={developerState} changeMood={changeMood} />
-      {/* </DeveloperContext.Provider> */}
-    </div>
-  );
+    return (
+        <>
+            <Header />
+            <Container fixed>
+                <EmployeeTable />
+            </Container>
+        </>
+    );
 }
 
 export default App;
